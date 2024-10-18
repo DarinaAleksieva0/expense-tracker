@@ -1,6 +1,7 @@
 
 const form = document.getElementById('expense-form');
 const expenseList = document.getElementById('expense-list');
+ 
 
 //event listener for form submission
 form.addEventListener('submit', (event) => {
@@ -8,7 +9,7 @@ form.addEventListener('submit', (event) => {
 
     //capturing input values
     const description = document.getElementById('description').value;
-    const amount = document.getElementById('amount').value;
+    const amount = parseFloat(document.getElementById('amount').value);
     const category = document.getElementById('category').value;
 
     if (isNaN(amount) || amount <= 0) {
@@ -47,7 +48,7 @@ const saveExpenseToLocalStorage = (expense) => {
 
 //function to add expense to the ui list
 const addExpenseToList = (expense) => {
-    const expenseItem = document.createElement('div');
+    const expenseItem = document.createElement('li');
     const formattedDate = new Date(expense.date).toLocaleDateString();
     expenseItem.classList.add('expense-item'); //styling
     expenseItem.textContent = `${expense.description} - $${expense.amount} (${expense.category}) on ${formattedDate}`;
@@ -71,6 +72,7 @@ const deleteExpenseFromLocalStorage = (id) => {
     expenses = expenses.filter(expense => expense.id !== id);
     localStorage.setItem('expenses', JSON.stringify(expenses));
 }
+
 
 window.onload = function () {
     const storedExpenses = JSON.parse(localStorage.getItem('expenses')) || [];
