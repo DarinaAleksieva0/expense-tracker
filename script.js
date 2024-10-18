@@ -1,8 +1,9 @@
+
 const form = document.getElementById('expense-form');
 const expenseList = document.getElementById('expense-list');
 
 //event listener for form submission
-form.addEventListener('submit', (event)=>{
+form.addEventListener('submit', (event) => {
     event.preventDefault(); //prevent the default form submission
 
     //capturing input values
@@ -10,16 +11,17 @@ form.addEventListener('submit', (event)=>{
     const amount = document.getElementById('amount').value;
     const category = document.getElementById('category').value;
 
-    if(isNaN(amount) || amount <= 0){
+    if (isNaN(amount) || amount <= 0) {
         alert('Please enter a valid amount.');
         return;
     }
-    
+
     const expense = {
         description: description,
         amount: amount,
         category: category,
-        date: new Date()
+        date: new Date(),
+        id: Date.now()
     }
 
     //save the expense  to local storage
@@ -30,7 +32,7 @@ form.addEventListener('submit', (event)=>{
 
     //clearInputFields
     form.reset();
-    
+
 });
 
 //function to save expenses to local storage
@@ -50,10 +52,27 @@ const addExpenseToList = (expense) => {
     expenseItem.classList.add('expense-item'); //styling
     expenseItem.textContent = `${expense.description} - $${expense.amount} (${expense.category}) on ${formattedDate}`;
 
+    const deleteBtn = document.createElement('button');
+    deleteBtn.textContent = 'Delete'
+    deleteBtn.classList.add('delete-btn');
+
+    deleteBtn.addEventListener('click', () => {
+        deleteExpenseFromLocalStorage(expense.id);
+        expenseList.removeChild(expenseItem);
+    })
+
+    expenseItem.appendChild(deleteBtn);
     expenseList.appendChild(expenseItem);
 }
 
-window.onload = function() {
+
+const deleteExpenseFromLocalStorage = (id) => {
+    let expenses = JSON.parse(localStorage.getItem('expenses')) || [];
+    expenses = expenses.filter(expense => expense.id !== id);
+    localStorage.setItem('expenses', JSON.stringify(expenses));
+}
+
+window.onload = function () {
     const storedExpenses = JSON.parse(localStorage.getItem('expenses')) || [];
     storedExpenses.forEach(expense => addExpenseToList(expense));
 };
