@@ -10,16 +10,23 @@
 </head>
 <body>
     
-    <h1>Expense Tracker</h1>
+    <div id="heading-container">
+        <h1>Expense Tracker</h1>
+        <p>Add, track and delete all your expenses.</p>
+    </div>
 
     <form id="expense-form">
+     
         <input type="text" id="description" placeholder="Description" required>
         <input type="number" id="amount" placeholder="Amount" required>
         <input type="text" id="category" placeholder="Category" required>
+        
         <button type="submit">Add Expense</button>
     </form>
 
-    <div id="expense-list"></div>
+    <ol id="expense-list">
+        
+    </ol>
     <script src="script.js"></script>
 
 </body>
