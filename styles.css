@@ -89,14 +89,14 @@ body{
     width: 40%;
     padding: 3rem 0;
     padding-left: 2.5rem;
-    list-style-type: decimal;
 }
 
 .expense-item{
-    display: flex;         
+           
     align-items: center;
     color: #fff;
     font-size: 1.4rem;
+    list-style-type: decimal;
     margin: 0.5rem 0;
 }
 
