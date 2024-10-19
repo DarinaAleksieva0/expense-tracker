@@ -91,12 +91,10 @@ body{
     padding-left: 2.5rem;
 }
 
-.expense-item{
-           
+.expense-item{ 
     align-items: center;
     color: #fff;
     font-size: 1.4rem;
-    list-style-type: decimal;
     margin: 0.5rem 0;
 }
 
@@ -110,5 +108,4 @@ body{
     color: #fff;
     border-radius: 0.25rem;
 }
-
 
